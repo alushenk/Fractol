@@ -2,21 +2,41 @@
 // Created by Anton Lushenko on 3/8/17.
 //
 
-#include "fractol.h"
+#include "src/fractol.h"
 
-int 	main(int argc, char **argv)
+static void	struct_init(t_map **mlx)
 {
-	void *init;
-	void *win;
+	if (*mlx == NULL)
+	{
+		*mlx = (t_map *)malloc(sizeof(t_map));
+	}
+	(*mlx)->init = NULL;
+	(*mlx)->win = NULL;
+	(*mlx)->img = NULL;
+	(*mlx)->zoom = 1;
+	(*mlx)->moveX = 0;
+	(*mlx)->moveY = 0;
+}
 
+int			exit_button(void)
+{
+	ft_putstr("Escape pressed. Exiting..");
+	exit(0);
+}
 
-	init = mlx_init();
-	win = mlx_new_window(init, WIN_SIZE_X, WIN_SIZE_Y, argv[1]);
+int 	main(void)
+{
+	t_map	*mlx;
+	int		fd;
 
-
-
-	//mlx_hook(win, 2, 5, key_hook, mlx);
-	//mlx_hook(win, 17, 0L, exit_button, 0);
-	mlx_loop(init);
+	mlx = NULL;
+	struct_init(&mlx);
+	mlx->init = mlx_init();
+	mlx->win = mlx_new_window(mlx->init, WIN_SIZE_X, WIN_SIZE_Y, "huy");
+	draw(mlx);
+	mlx_hook(mlx->win, 2, 5, key_hook, mlx);
+	mlx_mouse_hook(mlx->win, mouse_hook, mlx);
+	mlx_hook(mlx->win, 17, 0L, exit_button, 0);
+	mlx_loop(mlx->init);
 	return (0);
 }
