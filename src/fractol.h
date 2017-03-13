@@ -8,12 +8,11 @@
 #include <mlx.h>
 #include <stdio.h>
 # include <stdlib.h>
+#include <math.h>
 #include "../libft/libft.h"
 
 #define WIN_SIZE_X 1200
 #define WIN_SIZE_Y 1000
-#define WIN_CENTRE_X 600
-#define WIN_CENTRE_Y 500
 
 # define KEY_SCALE_INCREASE 69
 # define KEY_SCALE_DECREASE 78
@@ -41,14 +40,34 @@ typedef struct		s_map
 	int				l_size;
 }					t_map;
 
+typedef struct		s_bresenham
+{
+	int				move_x;
+	int				move_y;
+	int				delta_x;
+	int				delta_y;
+	int				error;
+	int				error2;
+	int				x0;
+	int				y0;
+	int				x1;
+	int				y1;
+}					t_bresenham;
 
 /*
 ** draw.c
 */
 void		draw(t_map *mlx);
+void	write_pixel(int x, int y, int color, t_map *mlx);
 /*
 ** events.c
 */
 int			key_hook(int key, t_map *mlx);
 int     mouse_hook(int key, int x, int y, t_map *mlx);
+/*
+** fractals.c
+*/
+void julia(t_map *mlx);
+void tree(t_map *mlx);
+
 #endif //FRACTOL_FRACTOL_H

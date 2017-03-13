@@ -14,8 +14,8 @@ static void	struct_init(t_map **mlx)
 	(*mlx)->win = NULL;
 	(*mlx)->img = NULL;
 	(*mlx)->zoom = 1;
-	(*mlx)->moveX = 0;
-	(*mlx)->moveY = 0;
+	(*mlx)->moveX = WIN_SIZE_X / 2;
+	(*mlx)->moveY = WIN_SIZE_Y / 2;
 }
 
 int			exit_button(void)
