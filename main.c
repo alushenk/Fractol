@@ -14,8 +14,8 @@ static void	struct_init(t_map **mlx)
 	(*mlx)->win = NULL;
 	(*mlx)->img = NULL;
 	(*mlx)->zoom = 1;
-	(*mlx)->moveX = WIN_SIZE_X / 2;
-	(*mlx)->moveY = WIN_SIZE_Y / 2;
+	(*mlx)->moveX = WIN_SIZE / 2;
+	(*mlx)->moveY = (*mlx)->moveX;
 }
 
 int			exit_button(void)
@@ -32,7 +32,7 @@ int 	main(void)
 	mlx = NULL;
 	struct_init(&mlx);
 	mlx->init = mlx_init();
-	mlx->win = mlx_new_window(mlx->init, WIN_SIZE_X, WIN_SIZE_Y, "huy");
+	mlx->win = mlx_new_window(mlx->init, WIN_SIZE, WIN_SIZE, "huy");
 	draw(mlx);
 	mlx_hook(mlx->win, 2, 5, key_hook, mlx);
 	mlx_mouse_hook(mlx->win, mouse_hook, mlx);

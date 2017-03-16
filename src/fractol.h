@@ -9,10 +9,16 @@
 #include <stdio.h>
 # include <stdlib.h>
 #include <math.h>
+#include <pthread.h>
 #include "../libft/libft.h"
 
-#define WIN_SIZE_X 1200
-#define WIN_SIZE_Y 1000
+/*
+** window must be quadrate to let program be simple as fuck
+*/
+#define WIN_SIZE 1200
+#define SIZE 100
+
+#define MAX_ITERATIONS 300
 
 # define KEY_SCALE_INCREASE 69
 # define KEY_SCALE_DECREASE 78
@@ -54,11 +60,21 @@ typedef struct		s_bresenham
 	int				y1;
 }					t_bresenham;
 
+typedef struct		s_fractal
+{
+	int x;
+	int y;
+	t_map mlx;
+}					t_fractal;
+
 /*
 ** draw.c
 */
-void		draw(t_map *mlx);
+void	draw(t_map *mlx);
 void	write_pixel(int x, int y, int color, t_map *mlx);
+void	draw_line(int x0, int y0, int x1, int y1, t_map *mlx);
+int		in_range(int x, int y);
+void	bresen_init(t_bresenham *b, int x0, int y0, int x1, int y1);
 /*
 ** events.c
 */
@@ -67,7 +83,10 @@ int     mouse_hook(int key, int x, int y, t_map *mlx);
 /*
 ** fractals.c
 */
-void julia(t_map *mlx);
+void *julia(void *f);
 void tree(t_map *mlx);
+
+
+void	mandelbrot(t_map *mlx);
 
 #endif //FRACTOL_FRACTOL_H

@@ -45,11 +45,6 @@ int key_hook(int key, t_map *mlx)
 
 int mouse_hook(int key, int x, int y, t_map *mlx)
 {
-/*	fr->zx = fr->zx + (fr->zx - x) / 5;
-	fr->zy = fr->zy + (fr->zy - y) / 5;
-	fr->zoom += fr->zoom / 5;*/
-
-
 	if (key == MOUSE_WHEEL_UP)
 	{
 		mlx->moveX += ((mlx->moveX - x) / 5);
