@@ -73,7 +73,7 @@ void		draw(t_map *mlx)
 	int i;
 	int j;
 
-
+/*
 	fractal = (t_fractal***)malloc(sizeof(t_fractal**) * (WIN_SIZE / SIZE + 1));
 	y = 0;
 	i = 0;
@@ -97,7 +97,8 @@ void		draw(t_map *mlx)
 		j++;
 	}
 	//free(fractal);
-	//mandelbrot(mlx);
+ */
+	mandelbrot(mlx);
 	//tree(mlx);
 	mlx_put_image_to_window(mlx->init, mlx->win, mlx->img, 0, 0);
 }
