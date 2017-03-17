@@ -18,7 +18,7 @@
 #define WIN_SIZE 1000
 #define SIZE 100
 
-#define MAX_ITERATIONS 200
+#define MAX_ITERATIONS 50
 
 # define KEY_SCALE_INCREASE 69
 # define KEY_SCALE_DECREASE 78

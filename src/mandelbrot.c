@@ -34,12 +34,12 @@ void	*mandelbrot(void *f)
 			{
 				oldRe = newRe;
 				oldIm = newIm;
-				newRe = oldRe * oldRe - oldIm * oldIm + cRe;
+				newRe = oldRe * oldRe * oldRe - oldIm * oldIm * oldIm + cRe;
 				newIm = 2 * oldRe * oldIm + cIm;
 			}
-			color = (unsigned char)((i * 4) % 255);
+			color = (unsigned char)((i * 9) % 255);
 			color <<= 16;
-			color |= (unsigned char)((i * 16) % 255);
+			color |= (unsigned char)((i * 9) % 255);
 			write_pixel(x, fract.y, color, &fract.mlx);
 			x++;
 		}
