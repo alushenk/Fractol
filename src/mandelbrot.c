@@ -25,8 +25,8 @@ void	mandelbrot(t_map *mlx)
 		x = -1;
 		while (++x < WIN_SIZE)
 		{
-			cRe = (2 * (double)x / WIN_SIZE - 1) / (mlx->zoom) + mlx->moveX;
-			cIm = (2 * (double)y / WIN_SIZE - 1) / (mlx->zoom) + mlx->moveY;
+			cRe = (2 * (double)x / WIN_SIZE - 1) / (mlx->zoom * 0.5) + 0.005;
+			cIm = (2 * (double)y / WIN_SIZE - 1) / (mlx->zoom * 0.5) + 0.005;
 			newRe = 0;
 			newIm = 0;
 			i = -1;
@@ -38,9 +38,9 @@ void	mandelbrot(t_map *mlx)
 				newIm = 2 * oldRe * oldIm + cIm;
 			}
 			//printf("x = %d, y = %d, i = %d\n", x, y, i);
-			color = (unsigned char)((i * 9) % 255);
+			color = (unsigned char)((i * 4) % 255);
 			color <<= 16;
-			color |= (unsigned char)((i * 9) % 255);
+			color |= (unsigned char)((i * 16) % 255);
 			write_pixel(x, y, color, mlx);
 		}
 	}

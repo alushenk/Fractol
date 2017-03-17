@@ -66,45 +66,30 @@ void		draw(t_map *mlx)
 	mlx->img = mlx_new_image(mlx->init, WIN_SIZE, WIN_SIZE);
 	mlx->img_d = mlx_get_data_addr(mlx->img, &mlx->bpp, &mlx->l_size, &mlx->e);
 
-	pthread_t thread;
-	t_fractal *fractal;
-	int x;
-	int y;
+	pthread_t *thread;
+	t_fractal fractal;
 	int i;
-	int j;
 
-	fractal = (t_fractal*)malloc(sizeof(t_fractal));
-	fractal->mlx = mlx;
-	fractal->x = -1;
-	fractal->y = -1;
+	fractal.mlx = mlx;
+	fractal.x = 0;
+	fractal.y = 0;
 
-/*
-	fractal = (t_fractal***)malloc(sizeof(t_fractal**) * (WIN_SIZE / SIZE + 1));
-	y = 0;
+	thread = (pthread_t*)malloc(sizeof(pthread_t) * 12);
 	i = 0;
-	while (y < WIN_SIZE)
+	while (fractal.y < WIN_SIZE)
 	{
-		x = 0;
-		j = 0;
-		fractal[j] = (t_fractal**)malloc(sizeof(t_fractal*) * (WIN_SIZE / SIZE + 1));
-		while (x < WIN_SIZE)
-		{
-			fractal[j][i] = (t_fractal*)malloc(sizeof(t_fractal));
-			fractal[j][i]->x = x;
-			fractal[j][i]->y = y;
-			fractal[j][i]->mlx = *mlx;
-			//pthread_create( &thread, NULL, julia, fractal[j][i]);
-			julia(fractal[j][i]);
-			x += SIZE;
-			i++;
-		}
-		y += SIZE;
-		j++;
+		pthread_create( &thread[i], NULL, julia, &fractal);
+		//julia(&fractal);
+		fractal.y += SIZE;
+		i++;
 	}
-	//free(fractal);
- */
-	julia(fractal);
-	free(fractal);
+	fractal.y = 0;
+	while (fractal.y < i)
+	{
+		pthread_join(thread[fractal.y], NULL);
+		fractal.y++;
+	}
+	free(thread);
 	//mandelbrot(mlx);
 	//tree(mlx);
 	mlx_put_image_to_window(mlx->init, mlx->win, mlx->img, 0, 0);
