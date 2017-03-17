@@ -47,9 +47,9 @@ int mouse_hook(int key, int x, int y, t_map *mlx)
 {
 	if (key == MOUSE_WHEEL_UP)
 	{
-		mlx->moveX += ((mlx->moveX - x) / 5);
-		mlx->moveY += ((mlx->moveY - y) / 5);
-		mlx->zoom += mlx->zoom / 5;
+		mlx->moveX += ((mlx->moveX - x) / 10);
+		mlx->moveY += ((mlx->moveY - y) / 10);
+		mlx->zoom += mlx->zoom / 10;
 	}
 	else if (key == MOUSE_WHEEL_DOWN)
 	{
@@ -58,6 +58,6 @@ int mouse_hook(int key, int x, int y, t_map *mlx)
 		mlx->zoom -= mlx->zoom / 5;
 	}
 	draw(mlx);
-	printf("key = %d\t x = %d\t y = %d\n", key, x, y);
+	//printf("key = %d\t x = %d\t y = %d\n", key, x, y);
 	return (0);
 }

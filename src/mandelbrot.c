@@ -4,10 +4,9 @@
 
 #include "fractol.h"
 
-void	mandelbrot(t_map *mlx)
+void	*mandelbrot(void *f)
 {
 	int x;
-	int y;
 	int i;
 	double oldRe;
 	double oldIm;
@@ -16,17 +15,18 @@ void	mandelbrot(t_map *mlx)
 	double cRe;
 	double cIm;
 	int color;
-	double zoom;
+	int len;
+	t_fractal fract;
 
-	//zoom = 0.5 * mlx->zoom * WIN_SIZE / 2;
-	y = -1;
-	while (++y < WIN_SIZE)
+	fract = *((t_fractal*)f);
+	len = fract.y + 100;
+	while (fract.y < len)
 	{
-		x = -1;
-		while (++x < WIN_SIZE)
+		x = fract.x;
+		while (x < WIN_SIZE)
 		{
-			cRe = (2 * (double)x / WIN_SIZE - 1) / (mlx->zoom * 0.5) + 0.005;
-			cIm = (2 * (double)y / WIN_SIZE - 1) / (mlx->zoom * 0.5) + 0.005;
+			cRe = (2 * (double)x / WIN_SIZE - 1) / (fract.mlx.zoom * 0.5) + 0.005;
+			cIm = (2 * (double)fract.y / WIN_SIZE - 1) / (fract.mlx.zoom * 0.5) + 0.005;
 			newRe = 0;
 			newIm = 0;
 			i = -1;
@@ -37,11 +37,13 @@ void	mandelbrot(t_map *mlx)
 				newRe = oldRe * oldRe - oldIm * oldIm + cRe;
 				newIm = 2 * oldRe * oldIm + cIm;
 			}
-			//printf("x = %d, y = %d, i = %d\n", x, y, i);
 			color = (unsigned char)((i * 4) % 255);
 			color <<= 16;
 			color |= (unsigned char)((i * 16) % 255);
-			write_pixel(x, y, color, mlx);
+			write_pixel(x, fract.y, color, &fract.mlx);
+			x++;
 		}
+		fract.y++;
 	}
+	return NULL;
 }

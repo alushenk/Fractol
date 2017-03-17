@@ -15,10 +15,10 @@
 /*
 ** window must be quadrate to let program be simple as fuck
 */
-#define WIN_SIZE 1200
+#define WIN_SIZE 1000
 #define SIZE 100
 
-#define MAX_ITERATIONS 40
+#define MAX_ITERATIONS 200
 
 # define KEY_SCALE_INCREASE 69
 # define KEY_SCALE_DECREASE 78
@@ -64,7 +64,7 @@ typedef struct		s_fractal
 {
 	int x;
 	int y;
-	t_map *mlx;
+	t_map mlx;
 }					t_fractal;
 
 /*
@@ -83,10 +83,14 @@ int     mouse_hook(int key, int x, int y, t_map *mlx);
 /*
 ** fractals.c
 */
+
+/*
+** julia.c
+*/
 void *julia(void *f);
-void tree(t_map *mlx);
-
-
-void	mandelbrot(t_map *mlx);
+/*
+** mandelbrot.c
+*/
+void *mandelbrot(void *f);
 
 #endif //FRACTOL_FRACTOL_H
