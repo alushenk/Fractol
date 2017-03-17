@@ -18,18 +18,18 @@ void	mandelbrot(t_map *mlx)
 	int color;
 	double zoom;
 
-	mlx->zoom = 0.5 * mlx->zoom * WIN_SIZE / 2;
-	y = 0;
+	//zoom = 0.5 * mlx->zoom * WIN_SIZE / 2;
+	y = -1;
 	while (++y < WIN_SIZE)
 	{
-		x = 0;
+		x = -1;
 		while (++x < WIN_SIZE)
 		{
-			cRe = (x - WIN_SIZE / 2) / (mlx->zoom * (WIN_SIZE / 2)) + mlx->moveX;
-			cIm = (y - WIN_SIZE / 2) / (mlx->zoom * (WIN_SIZE / 2)) + mlx->moveY;
-			newRe = mlx->moveX;
-			newIm = mlx->moveY;
-			i = 0;
+			cRe = (2 * (double)x / WIN_SIZE - 1) / (mlx->zoom) + mlx->moveX;
+			cIm = (2 * (double)y / WIN_SIZE - 1) / (mlx->zoom) + mlx->moveY;
+			newRe = 0;
+			newIm = 0;
+			i = -1;
 			while (++i < MAX_ITERATIONS && (newRe * newRe + newIm * newIm) < 4)
 			{
 				oldRe = newRe;
@@ -37,6 +37,7 @@ void	mandelbrot(t_map *mlx)
 				newRe = oldRe * oldRe - oldIm * oldIm + cRe;
 				newIm = 2 * oldRe * oldIm + cIm;
 			}
+			//printf("x = %d, y = %d, i = %d\n", x, y, i);
 			color = (unsigned char)((i * 9) % 255);
 			color <<= 16;
 			color |= (unsigned char)((i * 9) % 255);

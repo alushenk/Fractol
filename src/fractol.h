@@ -64,7 +64,7 @@ typedef struct		s_fractal
 {
 	int x;
 	int y;
-	t_map mlx;
+	t_map *mlx;
 }					t_fractal;
 
 /*

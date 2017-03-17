@@ -13,8 +13,8 @@ static void	struct_init(t_map **mlx)
 	(*mlx)->init = NULL;
 	(*mlx)->win = NULL;
 	(*mlx)->img = NULL;
-	(*mlx)->zoom = 1;
-	(*mlx)->moveX = WIN_SIZE / 2;
+	(*mlx)->zoom = 0.5;
+	(*mlx)->moveX = 0.005;
 	(*mlx)->moveY = (*mlx)->moveX;
 }
 

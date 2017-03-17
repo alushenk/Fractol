@@ -15,26 +15,26 @@ void *julia(void *f)
 	int leny;
 	int x;
 	int y;
-	t_fractal *fract;
+	t_fractal fract;
 
-	fract = ((t_fractal*)f);
+	fract = *((t_fractal*)f);
 
-	lenx = fract->x + SIZE;
-	leny = fract->y + SIZE;
+	lenx = fract.x + SIZE;
+	leny = fract.y + SIZE;
 
 	cRe = -0.70176;
 	cIm = -0.3842;
 
 	//может зум надо перещитывать внутри цикла так как он может меняться из событий
-	zoom = 0.5 * fract->mlx.zoom * WIN_SIZE / 2;
-	y = ((t_fractal*)f)->y;
-	while (y < leny)
+	//zoom = fract->mlx->zoom * WIN_SIZE / 2;
+	y = fract.y;
+	while (++y < WIN_SIZE)
 	{
-		x = fract->x;
-		while (x++ < lenx)
+		x = fract.x;
+		while (++x < WIN_SIZE)
 		{
-			newRe = 1.5 * (x - fract->mlx.moveX) / zoom;
-			newIm = (y - fract->mlx.moveY) / zoom;
+			newRe = 1.5 * ((double)x - WIN_SIZE / 2) / fract.mlx->zoom;
+			newIm = ((double)y - WIN_SIZE / 2) / fract.mlx->zoom;
 			i = 0;
 			while (++i < MAX_ITERATIONS && (newRe * newRe + newIm * newIm) < 4)
 			{
@@ -48,9 +48,8 @@ void *julia(void *f)
 			//color |= (unsigned char)((i * 8) % 255);
 			//color <<= 8;
 			color |= (unsigned char)((i * 9) % 255);
-			write_pixel(x, y, color, &fract->mlx);
+			write_pixel(x, y, color, fract.mlx);
 		}
-		y++;
 	}
 	return NULL;
 }

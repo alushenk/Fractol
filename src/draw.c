@@ -67,11 +67,16 @@ void		draw(t_map *mlx)
 	mlx->img_d = mlx_get_data_addr(mlx->img, &mlx->bpp, &mlx->l_size, &mlx->e);
 
 	pthread_t thread;
-	t_fractal ***fractal;
+	t_fractal *fractal;
 	int x;
 	int y;
 	int i;
 	int j;
+
+	fractal = (t_fractal*)malloc(sizeof(t_fractal));
+	fractal->mlx = mlx;
+	fractal->x = -1;
+	fractal->y = -1;
 
 /*
 	fractal = (t_fractal***)malloc(sizeof(t_fractal**) * (WIN_SIZE / SIZE + 1));
@@ -98,7 +103,9 @@ void		draw(t_map *mlx)
 	}
 	//free(fractal);
  */
-	mandelbrot(mlx);
+	julia(fractal);
+	free(fractal);
+	//mandelbrot(mlx);
 	//tree(mlx);
 	mlx_put_image_to_window(mlx->init, mlx->win, mlx->img, 0, 0);
 }
