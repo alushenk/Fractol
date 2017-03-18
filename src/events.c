@@ -7,45 +7,36 @@
 int key_hook(int key, t_map *mlx)
 {
 	if (key == KEY_EXIT)
-	{
 		exit(0);
-	}
-	if (key == KEY_MOVE_LEFT)
-	{
+	else if (key == KEY_MOVE_LEFT)
 		mlx->moveX += STEP;
-		draw(mlx);
-	}
-	if (key == KEY_MOVE_RIGHT)
-	{
+	else if (key == KEY_MOVE_RIGHT)
 		mlx->moveX -= STEP;
-		draw(mlx);
-	}
-	if (key == KEY_MOVE_UP)
-	{
+	else if (key == KEY_MOVE_UP)
 		mlx->moveY += STEP;
-		draw(mlx);
-	}
-	if (key == KEY_MOVE_DOWN)
-	{
+	else if (key == KEY_MOVE_DOWN)
 		mlx->moveY -= STEP;
-		draw(mlx);
-	}
-	if (key == KEY_SCALE_INCREASE)
+	else if (key == KEY_SCALE_INCREASE)
 	{
-		mlx->zoom += STEP;
-		draw(mlx);
+		if (mlx->maxIter < SHRT_MAX)
+			mlx->maxIter += STEP;
 	}
-	if (key == KEY_SCALE_DECREASE)
+	else if (key == KEY_SCALE_DECREASE)
 	{
-		mlx->zoom -= STEP;
-		draw(mlx);
+		if (mlx->maxIter > 0)
+			mlx->maxIter -= STEP;
 	}
+	else
+		return (0);
+	draw(mlx);
 	return (0);
 }
 
 int mouse_hook(int key, int x, int y, t_map *mlx)
 {
-	if (key == MOUSE_WHEEL_UP)
+	if (key == MOUSE_CLICK_LEFT)
+		mlx->isMovable = mlx->isMovable ? 0 : 1;
+	else if (key == MOUSE_WHEEL_UP)
 	{
 		mlx->moveX += ((mlx->moveX - x) / 10);
 		mlx->moveY += ((mlx->moveY - y) / 10);
@@ -53,11 +44,22 @@ int mouse_hook(int key, int x, int y, t_map *mlx)
 	}
 	else if (key == MOUSE_WHEEL_DOWN)
 	{
-		mlx->moveX -= ((mlx->moveX - x) / 5);
-		mlx->moveY -= ((mlx->moveY - y) / 5);
-		mlx->zoom -= mlx->zoom / 5;
+		mlx->moveX -= ((mlx->moveX - x) / 10);
+		mlx->moveY -= ((mlx->moveY - y) / 10);
+		mlx->zoom -= mlx->zoom / 10;
 	}
+	printf("key = %d\t x = %d\t y = %d\n", key, x, y);
 	draw(mlx);
-	//printf("key = %d\t x = %d\t y = %d\n", key, x, y);
+	return (0);
+}
+
+int mouse_move(int x, int y, t_map *mlx)
+{
+	if (mlx->isMovable)
+	{
+		mlx->mouseX = 4 * (double)x / WIN_SIZE - 2;
+		mlx->mouseY = 4 * (double)y / WIN_SIZE - 2;
+		draw(mlx);
+	}
 	return (0);
 }

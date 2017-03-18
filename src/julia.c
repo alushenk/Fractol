@@ -4,7 +4,7 @@
 
 #include "fractol.h"
 
-void *julia(void *f)
+void *julia(void *fractal)
 {
 	int x;
 	int y;
@@ -17,39 +17,35 @@ void *julia(void *f)
 	double cIm;
 	int color;
 	int len;
-	t_fractal fract;
+	t_fractal f;
 
-	//эти константы меняются по формуле(в тетрадке)
-	cRe = -0.70176;
-	cIm = -0.3842;
+	cRe = -0.70176 + f.mlx.mouseX;
+	cIm = -0.3842 + f.mlx.mouseY;
 
-	fract = *((t_fractal*)f);
-	len = fract.y + 100;
-	while (fract.y < len)
+	f = *((t_fractal*)fractal);
+	len = f.y + 100;
+	while (f.y < len)
 	{
-		x = fract.x;
+		x = f.x;
 		while (x < WIN_SIZE)
 		{
-			newRe = ((double)x - fract.mlx.moveX) / fract.mlx.zoom;
-			newIm = ((double)fract.y - fract.mlx.moveY) / fract.mlx.zoom;
+			newRe = ((double)x - f.mlx.moveX) / f.mlx.zoom;
+			newIm = ((double)f.y - f.mlx.moveY) / f.mlx.zoom;
 			i = 0;
-			while (++i < MAX_ITERATIONS && (newRe * newRe + newIm * newIm) < 4)
+			while (++i < f.mlx.maxIter && (newRe * newRe + newIm * newIm) < 4)
 			{
 				oldRe = newRe;
 				oldIm = newIm;
-				//последнее число влияет на форму. берется из мышки
-				//a->t.mouse_x = 4 * (double)x / M_X - 2;
-				//a->t.mouse_y = 4 * (double)y / M_Y - 2;
-				newRe = oldRe * oldRe - oldIm * oldIm + cRe + 1;
-				newIm = 2 * oldRe * oldIm + cIm + 1;
+				newRe = oldRe * oldRe - oldIm * oldIm + cRe;
+				newIm = 2 * oldRe * oldIm + cIm;
 			}
 			color = (unsigned char)((i * 9) % 255);
 			color <<= 16;
 			color |= (unsigned char)((i * 9) % 255);
-			write_pixel(x, fract.y, color, &fract.mlx);
+			write_pixel(x, f.y, color, &f.mlx);
 			x++;
 		}
-		fract.y++;
+		f.y++;
 	}
 	return NULL;
 }

@@ -81,8 +81,8 @@ void		draw(t_map *mlx)
 		fractal[i].mlx = *mlx;
 		fractal[i].x = 0;
 		fractal[i].y = row;
-		pthread_create( &thread[i], NULL, julia, &fractal[i]);
-		//pthread_create( &thread[i], NULL, mandelbrot, &fractal[i]);
+		//pthread_create( &thread[i], NULL, julia, &fractal[i]);
+		pthread_create( &thread[i], NULL, mandelbrot, &fractal[i]);
 		//julia(&fractal[i]);
 		//mandelbrot(&fractal[i]);
 		row += SIZE;

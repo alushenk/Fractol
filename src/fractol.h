@@ -10,6 +10,7 @@
 # include <stdlib.h>
 #include <math.h>
 #include <pthread.h>
+#include <limits.h>
 #include "../libft/libft.h"
 
 /*
@@ -18,19 +19,21 @@
 #define WIN_SIZE 1000
 #define SIZE 100
 
-#define MAX_ITERATIONS 50
-
 # define KEY_SCALE_INCREASE 69
 # define KEY_SCALE_DECREASE 78
 #define KEY_MOVE_RIGHT 124
 #define KEY_MOVE_LEFT 123
 #define KEY_MOVE_UP 126
 #define KEY_MOVE_DOWN 125
+
+#define MOUSE_CLICK_LEFT 1
+#define MOUSE_CLICK_RIGHT 2
 #define MOUSE_WHEEL_UP 4
 #define MOUSE_WHEEL_DOWN 5
+
 # define KEY_EXIT 53
 
-#define STEP 0.1
+#define STEP 1
 
 typedef struct		s_map
 {
@@ -44,6 +47,11 @@ typedef struct		s_map
 	int				e;
 	int				bpp;
 	int				l_size;
+
+	short			maxIter;
+	int 			isMovable;
+	double 			mouseX;
+	double 			mouseY;
 }					t_map;
 
 typedef struct		s_bresenham
@@ -65,6 +73,16 @@ typedef struct		s_fractal
 	int x;
 	int y;
 	t_map mlx;
+	int i;
+	double oldRe;
+	double oldIm;
+	double newRe;
+	double newIm;
+	double cRe;
+	double cIm;
+	int color;
+	int len;
+
 }					t_fractal;
 
 /*
@@ -79,7 +97,8 @@ void	bresen_init(t_bresenham *b, int x0, int y0, int x1, int y1);
 ** events.c
 */
 int			key_hook(int key, t_map *mlx);
-int     mouse_hook(int key, int x, int y, t_map *mlx);
+int			mouse_hook(int key, int x, int y, t_map *mlx);
+int 		mouse_move(int x, int y, t_map *mlx);
 /*
 ** fractals.c
 */
@@ -87,10 +106,10 @@ int     mouse_hook(int key, int x, int y, t_map *mlx);
 /*
 ** julia.c
 */
-void *julia(void *f);
+void *julia(void *fractal);
 /*
 ** mandelbrot.c
 */
-void *mandelbrot(void *f);
+void *mandelbrot(void *fractal);
 
 #endif //FRACTOL_FRACTOL_H
