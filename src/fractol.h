@@ -70,7 +70,6 @@ typedef struct		s_bresenham
 
 typedef struct		s_fractal
 {
-	int x;
 	int y;
 	t_map mlx;
 	int i;

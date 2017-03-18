@@ -6,8 +6,8 @@
 
 static void	init_imre(t_fractal *f, int x)
 {
-	f->cRe = (2 * (double)x / WIN_SIZE - 1) / (f->mlx.zoom) + 0.005;
-	f->cIm = (2 * (double)f->y / WIN_SIZE - 1) / (f->mlx.zoom) + 0.005;
+	f->cRe = (2 * (double)x / WIN_SIZE - 1) / f->mlx.zoom + 0.005;
+	f->cIm = (2 * (double)f->y / WIN_SIZE - 1) / f->mlx.zoom + 0.005;
 	f->newRe = 0;
 	f->newIm = 0;
 }
@@ -16,8 +16,8 @@ static void	count_mandelbrot(t_fractal *f)
 {
 	f->oldRe = f->newRe;
 	f->oldIm = f->newIm;
-	f->newRe = f->oldRe * f->oldRe - f->oldIm * f->oldIm + f->cRe + f->mlx.mouseX;
-	f->newIm = 2 * f->oldRe * f->oldIm + f->cIm + f->mlx.mouseY;
+	f->newRe = f->oldRe * f->oldRe - f->oldIm * f->oldIm + f->cRe;
+	f->newIm = 2 * f->oldRe * f->oldIm + f->cIm;
 }
 
 static void	init_color(t_fractal *f)
@@ -36,7 +36,7 @@ void	*mandelbrot(void *fractal)
 	f.len = f.y + 100;
 	while (f.y < f.len)
 	{
-		x = f.x;
+		x = 0;
 		while (x < WIN_SIZE)
 		{
 			init_imre(&f, x);

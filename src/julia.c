@@ -7,7 +7,6 @@
 void *julia(void *fractal)
 {
 	int x;
-	int y;
 	int i;
 	double oldRe;
 	double oldIm;
@@ -26,7 +25,7 @@ void *julia(void *fractal)
 	len = f.y + 100;
 	while (f.y < len)
 	{
-		x = f.x;
+		x = 0;
 		while (x < WIN_SIZE)
 		{
 			newRe = ((double)x - f.mlx.moveX) / f.mlx.zoom;

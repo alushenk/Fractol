@@ -9,7 +9,7 @@ int key_hook(int key, t_map *mlx)
 	if (key == KEY_EXIT)
 		exit(0);
 	else if (key == KEY_MOVE_LEFT)
-		mlx->moveX += STEP;
+		mlx->moveX += mlx->moveX / 10;
 	else if (key == KEY_MOVE_RIGHT)
 		mlx->moveX -= STEP;
 	else if (key == KEY_MOVE_UP)
