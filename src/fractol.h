@@ -26,6 +26,10 @@
 #define KEY_MOVE_UP 126
 #define KEY_MOVE_DOWN 125
 
+#define KEY_NUMBER_1 18
+#define KEY_NUMBER_2 19
+#define KEY_NUMBER_3 20
+
 #define MOUSE_CLICK_LEFT 1
 #define MOUSE_CLICK_RIGHT 2
 #define MOUSE_WHEEL_UP 4
@@ -52,6 +56,8 @@ typedef struct		s_map
 	int 			isMovable;
 	double 			mouseX;
 	double 			mouseY;
+	int 			figure;
+	int 			threading_on;
 }					t_map;
 
 typedef struct		s_bresenham

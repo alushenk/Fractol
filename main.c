@@ -20,6 +20,8 @@ static void	struct_init(t_map **mlx)
 	(*mlx)->isMovable = 0;
 	(*mlx)->mouseX = 1;
 	(*mlx)->mouseY = 1;
+	(*mlx)->figure = 1;
+	(*mlx)->threading_on = 0;
 }
 
 int			exit_button(void)

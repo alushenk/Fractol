@@ -18,8 +18,8 @@ void *julia(void *fractal)
 	int len;
 	t_fractal f;
 
-	cRe = -0.70176 + f.mlx.mouseX;
-	cIm = -0.3842 + f.mlx.mouseY;
+	cRe = f.mlx.mouseX;//-0.70176 + f.mlx.mouseX;
+	cIm = f.mlx.mouseY;//-0.3842 + f.mlx.mouseY;
 
 	f = *((t_fractal*)fractal);
 	len = f.y + 100;

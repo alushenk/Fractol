@@ -16,6 +16,12 @@ int key_hook(int key, t_map *mlx)
 		mlx->moveY += STEP;
 	else if (key == KEY_MOVE_DOWN)
 		mlx->moveY -= STEP;
+	else if (key == KEY_NUMBER_1)
+		mlx->figure = 1;
+	else if (key == KEY_NUMBER_2)
+		mlx->figure = 2;
+	else if (key == KEY_NUMBER_3)
+		mlx->figure = 3;
 	else if (key == KEY_SCALE_INCREASE)
 	{
 		if (mlx->maxIter < SHRT_MAX)
