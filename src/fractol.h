@@ -27,6 +27,8 @@
 #define KEY_MOVE_DOWN 125
 #define KEY_RESET 15
 #define KEY_THREADS 17
+#define KEY_FREQUENCY_PLUS 24
+#define KEY_FREQUENCY_MINUS 27
 
 #define KEY_NUMBER_1 18
 #define KEY_NUMBER_2 19
@@ -63,7 +65,7 @@ typedef struct		s_map
 	int 			figure;
 	int 			threading_on;
 	int				color_scheme;
-	int				frequency;
+	char			frequency;
 }					t_map;
 
 typedef struct		s_bresenham

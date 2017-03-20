@@ -15,6 +15,7 @@ void	struct_reset(t_map *mlx, int figure)
 	mlx->mouseY = 1;
 	mlx->figure = figure;
 	mlx->threading_on = 0;
+	mlx->frequency = 105;
 }
 
 int key_hook(int key, t_map *mlx)
@@ -37,6 +38,10 @@ int key_hook(int key, t_map *mlx)
 		mlx->figure = 3;
 	else if (key == KEY_NUMBER_4)
 		mlx->figure = 4;
+	else if (key == KEY_FREQUENCY_PLUS)
+		mlx->frequency ++;
+	else if (key == KEY_FREQUENCY_MINUS)
+		mlx->frequency--;
 	else if (key == KEY_RESET)
 		struct_reset(mlx, mlx->figure);
 	else if (key == KEY_THREADS)

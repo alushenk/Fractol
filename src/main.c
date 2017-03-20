@@ -22,7 +22,7 @@ void	struct_init(t_map **mlx, int figure)
 	(*mlx)->mouseY = 1;
 	(*mlx)->figure = figure;
 	(*mlx)->threading_on = 0;
-	(*mlx)->frequency = 500;
+	(*mlx)->frequency = 105;
 }
 
 int			exit_button(void)

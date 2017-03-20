@@ -65,7 +65,7 @@ void		draw(t_map *mlx)
 			if (mlx->threading_on)
 				pthread_create(&fractal[i].thread, NULL, mandelabs, &fractal[i]);
 			else
-				mandelcube(&fractal[i]);
+				mandelabs(&fractal[i]);
 		}
 		row += SIZE;
 		i++;

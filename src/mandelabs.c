@@ -17,7 +17,7 @@ static void	count_mandelabs(t_fractal *f)
 	f->oldRe = f->newRe;
 	f->oldIm = f->newIm;
 	f->newRe = f->oldRe * f->oldRe - f->oldIm * f->oldIm + f->cRe;
-	f->newIm = -2 * abs(f->oldRe * f->oldIm) + f->cIm;
+	f->newIm = 2 * fabs(f->oldRe * f->oldIm) + f->cIm;
 }
 
 void	*mandelabs(void *fractal)
