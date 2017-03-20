@@ -12,7 +12,7 @@
 
 #include "fractol.h"
 
-void	struct_reset(t_map *mlx, int figure)
+void		struct_reset(t_map *mlx, int figure)
 {
 	mlx->zoom = 200;
 	mlx->moveX = WIN_SIZE / 2;
@@ -26,7 +26,7 @@ void	struct_reset(t_map *mlx, int figure)
 	mlx->frequency = 105;
 }
 
-int key_hook(int key, t_map *mlx)
+static int	hooks(int key, t_map *mlx)
 {
 	if (key == KEY_EXIT)
 		exit_button();
@@ -47,30 +47,38 @@ int key_hook(int key, t_map *mlx)
 	else if (key == KEY_NUMBER_4)
 		mlx->figure = 4;
 	else if (key == KEY_FREQUENCY_PLUS)
-		mlx->frequency ++;
+		mlx->frequency++;
 	else if (key == KEY_FREQUENCY_MINUS)
 		mlx->frequency--;
-	else if (key == KEY_RESET)
-		struct_reset(mlx, mlx->figure);
-	else if (key == KEY_THREADS)
-		mlx->threading_on = mlx->threading_on ? 0 : 1;
-	else if (key == KEY_SCALE_INCREASE)
-	{
-		if (mlx->maxIter < SHRT_MAX)
-			mlx->maxIter += STEP;
-	}
-	else if (key == KEY_SCALE_DECREASE)
-	{
-		if (mlx->maxIter > 0)
-			mlx->maxIter -= STEP;
-	}
 	else
-		return (0);
+		return (1);
+	return (0);
+}
+
+int			key_hook(int key, t_map *mlx)
+{
+	if (hooks(key, mlx))
+		if (key == KEY_THREADS)
+			mlx->threading_on = mlx->threading_on ? 0 : 1;
+		else if (key == KEY_RESET)
+			struct_reset(mlx, mlx->figure);
+		else if (key == KEY_SCALE_INCREASE)
+		{
+			if (mlx->maxIter < SHRT_MAX)
+				mlx->maxIter += STEP;
+		}
+		else if (key == KEY_SCALE_DECREASE)
+		{
+			if (mlx->maxIter > 0)
+				mlx->maxIter -= STEP;
+		}
+		else
+			return (0);
 	draw(mlx);
 	return (0);
 }
 
-int mouse_hook(int key, int x, int y, t_map *mlx)
+int			mouse_hook(int key, int x, int y, t_map *mlx)
 {
 	if (key == MOUSE_CLICK_LEFT)
 		mlx->isMovable = mlx->isMovable ? 0 : 1;
@@ -86,12 +94,11 @@ int mouse_hook(int key, int x, int y, t_map *mlx)
 		mlx->moveY -= ((mlx->moveY - y) / 5);
 		mlx->zoom -= mlx->zoom / 5;
 	}
-	//printf("key = %d\t x = %d\t y = %d\n", key, x, y);
 	draw(mlx);
 	return (0);
 }
 
-int mouse_move(int x, int y, t_map *mlx)
+int			mouse_move(int x, int y, t_map *mlx)
 {
 	if (mlx->isMovable)
 	{
