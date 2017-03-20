@@ -61,6 +61,7 @@ typedef struct		s_map
 	int 			figure;
 	int 			threading_on;
 	int				color_scheme;
+	int				frequency;
 }					t_map;
 
 typedef struct		s_bresenham
@@ -88,7 +89,7 @@ typedef struct		s_fractal
 	double newIm;
 	double cRe;
 	double cIm;
-	int color;
+	char color[3];
 	int len;
 	pthread_t thread;
 
@@ -98,7 +99,7 @@ typedef struct		s_fractal
 ** draw.c
 */
 void	draw(t_map *mlx);
-void	write_pixel(int x, int y, int color, t_map *mlx);
+void	write_pixel(int x, int y, char *color, t_map *mlx);
 void	init_color(t_fractal *f);
 /*
 ** events.c

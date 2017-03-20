@@ -4,21 +4,21 @@
 
 #include "fractol.h"
 
-void	write_pixel(int x, int y, int color, t_map *mlx)
+void	write_pixel(int x, int y, char *color, t_map *mlx)
 {
 	int a;
 
 	a = (y * mlx->l_size + (x * (mlx->bpp / 8)));
-	mlx->img_d[a] = (unsigned char)(color >> 16);
-	mlx->img_d[a + 1] = (unsigned char)(color >> 8);
-	mlx->img_d[a + 2] = (unsigned char)color;
+	mlx->img_d[a] = (char)color[2];
+	mlx->img_d[a + 1] = (char)color[1];
+	mlx->img_d[a + 2] = (char)color[0];
 }
 
 void	init_color(t_fractal *f)
 {
-	f->color = (unsigned char)((f->i * 9) % 255);
-	f->color <<= 16;
-	f->color |= (unsigned char)((f->i * 9) % 255);
+	f->color[0] = (char)(sin(f->mlx.frequency * f->i + 0) * 127 + 128);
+	f->color[1] = (char)(sin(f->mlx.frequency * f->i + 2) * 127 + 128);
+	f->color[2] = (char)(sin(f->mlx.frequency * f->i + 4) * 127 + 128);
 }
 
 void		draw(t_map *mlx)
