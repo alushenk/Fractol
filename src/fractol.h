@@ -26,6 +26,7 @@
 #define KEY_MOVE_UP 126
 #define KEY_MOVE_DOWN 125
 #define KEY_RESET 15
+#define KEY_THREADS 17
 
 #define KEY_NUMBER_1 18
 #define KEY_NUMBER_2 19

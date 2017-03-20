@@ -24,8 +24,8 @@ void *julia(void *fractal)
 	t_fractal f;
 
 	f = *((t_fractal*)fractal);
-	f.cRe = -0.70176 + f.mlx.mouseX;
-	f.cIm = -0.3842 + f.mlx.mouseY;
+	f.cRe = f.mlx.mouseX;
+	f.cIm = f.mlx.mouseY;
 	f.len = f.y + 100;
 	while (f.y < f.len)
 	{

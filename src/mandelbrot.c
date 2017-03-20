@@ -6,8 +6,8 @@
 
 static void	init_imre(t_fractal *f, int x)
 {
-	f->cRe = ((double)x / WIN_SIZE) / f->mlx.zoom;
-	f->cIm = ((double)f->y / WIN_SIZE) / f->mlx.zoom;
+	f->cRe = (1.5 * (double)x / f->mlx.moveX - 1) / f->mlx.zoom;
+	f->cIm = (1.5 * (double)f->y / f->mlx.moveY - 1) / f->mlx.zoom;
 	f->newRe = 0;
 	f->newIm = 0;
 }

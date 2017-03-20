@@ -37,6 +37,8 @@ int key_hook(int key, t_map *mlx)
 		mlx->figure = 3;
 	else if (key == KEY_RESET)
 		struct_reset(mlx, mlx->figure);
+	else if (key == KEY_THREADS)
+		mlx->threading_on = mlx->threading_on ? 0 : 1;
 	else if (key == KEY_SCALE_INCREASE)
 	{
 		if (mlx->maxIter < SHRT_MAX)
