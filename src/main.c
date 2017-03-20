@@ -58,6 +58,9 @@ int		main(int argc, char **argv)
 		mlx_loop(mlx->init);
 	}
 	else
-		ft_putstr("usage: ");
+	{
+		ft_putstr("Usage: ./fractol +\n1 - Julia\n2 - Mandelbrot\n");
+		ft_putstr("3 - Mandelcube\n4 - Burningship");
+	}
 	return (0);
 }
