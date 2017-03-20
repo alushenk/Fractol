@@ -12,13 +12,13 @@
 
 #include "fractol.h"
 
-static void	init_new(t_fractal *f, int x)
+static void		init_new(t_fractal *f, int x)
 {
 	f->new_re = ((double)x - f->mlx.move_x) / f->mlx.zoom;
 	f->new_im = ((double)f->y - f->mlx.move_y) / f->mlx.zoom;
 }
 
-static void	count_julia(t_fractal *f)
+static void		count_julia(t_fractal *f)
 {
 	f->old_re = f->new_re;
 	f->old_im = f->new_im;
@@ -26,10 +26,10 @@ static void	count_julia(t_fractal *f)
 	f->new_im = 2 * f->old_re * f->old_im + f->c_im;
 }
 
-void *julia(void *fractal)
+void			*julia(void *fractal)
 {
-	int x;
-	t_fractal f;
+	int			x;
+	t_fractal	f;
 
 	f = *((t_fractal*)fractal);
 	f.c_re = f.mlx.mouse_x;
@@ -42,7 +42,8 @@ void *julia(void *fractal)
 		{
 			init_new(&f, x);
 			f.i = -1;
-			while (++f.i < f.mlx.max_iter && (f.new_re * f.new_re + f.new_im * f.new_im) < 4)
+			while (++f.i < f.mlx.max_iter &&
+					(f.new_re * f.new_re + f.new_im * f.new_im) < 4)
 				count_julia(&f);
 			init_color(&f);
 			write_pixel(x, f.y, f.color, &f.mlx);
@@ -50,5 +51,5 @@ void *julia(void *fractal)
 		}
 		f.y++;
 	}
-	return NULL;
+	return (NULL);
 }

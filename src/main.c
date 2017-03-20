@@ -33,13 +33,13 @@ void	struct_init(t_map **mlx, int figure)
 	(*mlx)->frequency = 105;
 }
 
-int			exit_button(void)
+int		exit_button(void)
 {
 	ft_putstr("Escape pressed. Exiting..");
 	exit(0);
 }
 
-int 	main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
 	t_map	*mlx;
 	int		fd;

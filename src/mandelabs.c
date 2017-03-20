@@ -28,10 +28,10 @@ static void	count_mandelabs(t_fractal *f)
 	f->new_im = 2 * fabs(f->old_re * f->old_im) + f->c_im;
 }
 
-void	*mandelabs(void *fractal)
+void		*mandelabs(void *fractal)
 {
-	int x;
-	t_fractal f;
+	int			x;
+	t_fractal	f;
 
 	f = *((t_fractal*)fractal);
 	f.len = f.y + 100;
@@ -42,7 +42,8 @@ void	*mandelabs(void *fractal)
 		{
 			init_imre(&f, x);
 			f.i = -1;
-			while (++f.i < f.mlx.max_iter && (f.new_re * f.new_re + f.new_im * f.new_im) < 4)
+			while (++f.i < f.mlx.max_iter &&
+					(f.new_re * f.new_re + f.new_im * f.new_im) < 4)
 				count_mandelabs(&f);
 			init_color(&f);
 			write_pixel(x, f.y, f.color, &f.mlx);
@@ -50,5 +51,5 @@ void	*mandelabs(void *fractal)
 		}
 		f.y++;
 	}
-	return NULL;
+	return (NULL);
 }
