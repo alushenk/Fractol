@@ -4,10 +4,23 @@
 
 #include "fractol.h"
 
+void	struct_reset(t_map *mlx, int figure)
+{
+	mlx->zoom = 1;
+	mlx->moveX = WIN_SIZE / 2;
+	mlx->moveY = mlx->moveX;
+	mlx->maxIter = 20;
+	mlx->isMovable = 0;
+	mlx->mouseX = 1;
+	mlx->mouseY = 1;
+	mlx->figure = figure;
+	mlx->threading_on = 0;
+}
+
 int key_hook(int key, t_map *mlx)
 {
 	if (key == KEY_EXIT)
-		exit(0);
+		exit_button();
 	else if (key == KEY_MOVE_LEFT)
 		mlx->moveX += mlx->moveX / 10;
 	else if (key == KEY_MOVE_RIGHT)
@@ -22,6 +35,8 @@ int key_hook(int key, t_map *mlx)
 		mlx->figure = 2;
 	else if (key == KEY_NUMBER_3)
 		mlx->figure = 3;
+	else if (key == KEY_RESET)
+		struct_reset(mlx, mlx->figure);
 	else if (key == KEY_SCALE_INCREASE)
 	{
 		if (mlx->maxIter < SHRT_MAX)

@@ -25,6 +25,7 @@
 #define KEY_MOVE_LEFT 123
 #define KEY_MOVE_UP 126
 #define KEY_MOVE_DOWN 125
+#define KEY_RESET 15
 
 #define KEY_NUMBER_1 18
 #define KEY_NUMBER_2 19
@@ -58,6 +59,7 @@ typedef struct		s_map
 	double 			mouseY;
 	int 			figure;
 	int 			threading_on;
+	int				color_scheme;
 }					t_map;
 
 typedef struct		s_bresenham
@@ -95,9 +97,7 @@ typedef struct		s_fractal
 */
 void	draw(t_map *mlx);
 void	write_pixel(int x, int y, int color, t_map *mlx);
-void	draw_line(int x0, int y0, int x1, int y1, t_map *mlx);
-int		in_range(int x, int y);
-void	bresen_init(t_bresenham *b, int x0, int y0, int x1, int y1);
+void	init_color(t_fractal *f);
 /*
 ** events.c
 */
@@ -116,5 +116,10 @@ void *julia(void *fractal);
 ** mandelbrot.c
 */
 void *mandelbrot(void *fractal);
+/*
+** main.c
+*/
+void	struct_init(t_map **mlx, int figure);
+int			exit_button(void);
 
 #endif //FRACTOL_FRACTOL_H

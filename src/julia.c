@@ -4,44 +4,40 @@
 
 #include "fractol.h"
 
+static void	init_new(t_fractal *f, int x)
+{
+	f->newRe = ((double)x - f->mlx.moveX) / f->mlx.zoom;
+	f->newIm = ((double)f->y - f->mlx.moveY) / f->mlx.zoom;
+}
+
+static void	count_julia(t_fractal *f)
+{
+	f->oldRe = f->newRe;
+	f->oldIm = f->newIm;
+	f->newRe = f->oldRe * f->oldRe - f->oldIm * f->oldIm + f->cRe;
+	f->newIm = 2 * f->oldRe * f->oldIm + f->cIm;
+}
+
 void *julia(void *fractal)
 {
 	int x;
-	int i;
-	double oldRe;
-	double oldIm;
-	double newRe;
-	double newIm;
-	double cRe;
-	double cIm;
-	int color;
-	int len;
 	t_fractal f;
 
-	cRe = f.mlx.mouseX;//-0.70176 + f.mlx.mouseX;
-	cIm = f.mlx.mouseY;//-0.3842 + f.mlx.mouseY;
-
 	f = *((t_fractal*)fractal);
-	len = f.y + 100;
-	while (f.y < len)
+	f.cRe = -0.70176 + f.mlx.mouseX;
+	f.cIm = -0.3842 + f.mlx.mouseY;
+	f.len = f.y + 100;
+	while (f.y < f.len)
 	{
 		x = 0;
 		while (x < WIN_SIZE)
 		{
-			newRe = ((double)x - f.mlx.moveX) / f.mlx.zoom;
-			newIm = ((double)f.y - f.mlx.moveY) / f.mlx.zoom;
-			i = 0;
-			while (++i < f.mlx.maxIter && (newRe * newRe + newIm * newIm) < 4)
-			{
-				oldRe = newRe;
-				oldIm = newIm;
-				newRe = oldRe * oldRe - oldIm * oldIm + cRe;
-				newIm = 2 * oldRe * oldIm + cIm;
-			}
-			color = (unsigned char)((i * 9) % 255);
-			color <<= 16;
-			color |= (unsigned char)((i * 9) % 255);
-			write_pixel(x, f.y, color, &f.mlx);
+			init_new(&f, x);
+			f.i = -1;
+			while (++f.i < f.mlx.maxIter && (f.newRe * f.newRe + f.newIm * f.newIm) < 4)
+				count_julia(&f);
+			init_color(&f);
+			write_pixel(x, f.y, f.color, &f.mlx);
 			x++;
 		}
 		f.y++;
