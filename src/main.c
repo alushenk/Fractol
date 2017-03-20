@@ -39,7 +39,7 @@ int		exit_button(void)
 int		main(int argc, char **argv)
 {
 	t_map	*mlx;
-	int 	num;
+	int		num;
 
 	if ((argc == 2) && ft_isdigit(argv[1][0]))
 	{
