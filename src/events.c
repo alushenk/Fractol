@@ -58,6 +58,7 @@ static int	hooks(int key, t_map *mlx)
 int			key_hook(int key, t_map *mlx)
 {
 	if (hooks(key, mlx))
+	{
 		if (key == KEY_THREADS)
 			mlx->threading_on = mlx->threading_on ? 0 : 1;
 		else if (key == KEY_RESET)
@@ -74,6 +75,7 @@ int			key_hook(int key, t_map *mlx)
 		}
 		else
 			return (0);
+	}
 	draw(mlx);
 	return (0);
 }

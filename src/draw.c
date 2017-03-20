@@ -52,7 +52,7 @@ static int	fractals0(t_fractal *fractal, int i, int row, t_map *mlx)
 	return (1);
 }
 
-static int	fractals1(t_fractal *fractal, int i, int row, t_map *mlx)
+static int	fractals1(t_fractal *fractal, int i, t_map *mlx)
 {
 	if (mlx->figure == 3)
 	{
@@ -88,7 +88,7 @@ void		draw(t_map *mlx)
 	row = 0;
 	while (row < WIN_SIZE)
 	{
-		(fractals0(fractal, i, row, mlx) || fractals1(fractal, i, row, mlx));
+		(fractals0(fractal, i, row, mlx) || fractals1(fractal, i, mlx));
 		row += SIZE;
 		i++;
 	}

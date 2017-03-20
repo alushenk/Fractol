@@ -14,10 +14,7 @@
 
 void	struct_init(t_map **mlx, int figure)
 {
-	if (*mlx == NULL)
-	{
-		*mlx = (t_map *)malloc(sizeof(t_map));
-	}
+	*mlx = (t_map *)malloc(sizeof(t_map));
 	(*mlx)->init = NULL;
 	(*mlx)->win = NULL;
 	(*mlx)->img = NULL;
@@ -42,12 +39,12 @@ int		exit_button(void)
 int		main(int argc, char **argv)
 {
 	t_map	*mlx;
-	int		fd;
+	int 	num;
 
 	if ((argc == 2) && ft_isdigit(argv[1][0]))
 	{
-		mlx = NULL;
-		struct_init(&mlx, ft_atoi(argv[1]));
+		num = ft_atoi(argv[1]);
+		struct_init(&mlx, (num > 5) ? 1 : num);
 		mlx->init = mlx_init();
 		mlx->win = mlx_new_window(mlx->init, WIN_SIZE, WIN_SIZE, "fractol");
 		draw(mlx);
