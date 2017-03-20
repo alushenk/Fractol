@@ -90,6 +90,7 @@ typedef struct		s_fractal
 	double cIm;
 	int color;
 	int len;
+	pthread_t thread;
 
 }					t_fractal;
 
