@@ -31,6 +31,7 @@
 #define KEY_NUMBER_1 18
 #define KEY_NUMBER_2 19
 #define KEY_NUMBER_3 20
+#define KEY_NUMBER_4 21
 
 #define MOUSE_CLICK_LEFT 1
 #define MOUSE_CLICK_RIGHT 2
@@ -40,6 +41,7 @@
 # define KEY_EXIT 53
 
 #define STEP 1
+#define STEP_MOVE 20
 
 typedef struct		s_map
 {
@@ -123,6 +125,10 @@ void *mandelbrot(void *fractal);
 ** mandelcube.c
 */
 void	*mandelcube(void *fractal);
+/*
+** mandelabs.c
+*/
+void	*mandelabs(void *fractal);
 /*
 ** main.c
 */

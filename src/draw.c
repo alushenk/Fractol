@@ -60,6 +60,13 @@ void		draw(t_map *mlx)
 			else
 				mandelcube(&fractal[i]);
 		}
+		else if (mlx->figure == 4)
+		{
+			if (mlx->threading_on)
+				pthread_create(&fractal[i].thread, NULL, mandelabs, &fractal[i]);
+			else
+				mandelcube(&fractal[i]);
+		}
 		row += SIZE;
 		i++;
 	}

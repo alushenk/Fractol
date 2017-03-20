@@ -22,19 +22,21 @@ int key_hook(int key, t_map *mlx)
 	if (key == KEY_EXIT)
 		exit_button();
 	else if (key == KEY_MOVE_LEFT)
-		mlx->moveX += mlx->moveX / 10;
+		mlx->moveX += STEP_MOVE;
 	else if (key == KEY_MOVE_RIGHT)
-		mlx->moveX -= STEP;
+		mlx->moveX -= STEP_MOVE;
 	else if (key == KEY_MOVE_UP)
-		mlx->moveY += STEP;
+		mlx->moveY += STEP_MOVE;
 	else if (key == KEY_MOVE_DOWN)
-		mlx->moveY -= STEP;
+		mlx->moveY -= STEP_MOVE;
 	else if (key == KEY_NUMBER_1)
 		mlx->figure = 1;
 	else if (key == KEY_NUMBER_2)
 		mlx->figure = 2;
 	else if (key == KEY_NUMBER_3)
 		mlx->figure = 3;
+	else if (key == KEY_NUMBER_4)
+		mlx->figure = 4;
 	else if (key == KEY_RESET)
 		struct_reset(mlx, mlx->figure);
 	else if (key == KEY_THREADS)
