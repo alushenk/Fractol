@@ -14,18 +14,18 @@
 
 static void	init_imre(t_fractal *f, int x)
 {
-	f->cRe = ((double)(x - f->mlx.moveX + 0.5)) / f->mlx.zoom;
-	f->cIm = ((double)(f->y - f->mlx.moveY)) / f->mlx.zoom;
-	f->newRe = 0;
-	f->newIm = 0;
+	f->c_re = ((double)(x - f->mlx.move_x + 0.5)) / f->mlx.zoom;
+	f->c_im = ((double)(f->y - f->mlx.move_y)) / f->mlx.zoom;
+	f->new_re = 0;
+	f->new_im = 0;
 }
 
 static void	count_mandelabs(t_fractal *f)
 {
-	f->oldRe = f->newRe;
-	f->oldIm = f->newIm;
-	f->newRe = f->oldRe * f->oldRe - f->oldIm * f->oldIm + f->cRe;
-	f->newIm = 2 * fabs(f->oldRe * f->oldIm) + f->cIm;
+	f->old_re = f->new_re;
+	f->old_im = f->new_im;
+	f->new_re = f->old_re * f->old_re - f->old_im * f->old_im + f->c_re;
+	f->new_im = 2 * fabs(f->old_re * f->old_im) + f->c_im;
 }
 
 void	*mandelabs(void *fractal)
@@ -42,7 +42,7 @@ void	*mandelabs(void *fractal)
 		{
 			init_imre(&f, x);
 			f.i = -1;
-			while (++f.i < f.mlx.maxIter && (f.newRe * f.newRe + f.newIm * f.newIm) < 4)
+			while (++f.i < f.mlx.max_iter && (f.new_re * f.new_re + f.new_im * f.new_im) < 4)
 				count_mandelabs(&f);
 			init_color(&f);
 			write_pixel(x, f.y, f.color, &f.mlx);
