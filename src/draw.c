@@ -53,6 +53,13 @@ void		draw(t_map *mlx)
 			else
 				mandelbrot(&fractal[i]);
 		}
+		else if (mlx->figure == 3)
+		{
+			if (mlx->threading_on)
+				pthread_create(&fractal[i].thread, NULL, mandelcube, &fractal[i]);
+			else
+				mandelcube(&fractal[i]);
+		}
 		row += SIZE;
 		i++;
 	}

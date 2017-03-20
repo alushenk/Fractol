@@ -6,7 +6,7 @@
 
 void	struct_reset(t_map *mlx, int figure)
 {
-	mlx->zoom = 1;
+	mlx->zoom = 200;
 	mlx->moveX = WIN_SIZE / 2;
 	mlx->moveY = mlx->moveX;
 	mlx->maxIter = 20;
@@ -61,17 +61,17 @@ int mouse_hook(int key, int x, int y, t_map *mlx)
 		mlx->isMovable = mlx->isMovable ? 0 : 1;
 	else if (key == MOUSE_WHEEL_UP)
 	{
-		mlx->moveX += ((mlx->moveX - x) / 10);
-		mlx->moveY += ((mlx->moveY - y) / 10);
-		mlx->zoom += mlx->zoom / 10;
+		mlx->moveX += ((mlx->moveX - x) / 5);
+		mlx->moveY += ((mlx->moveY - y) / 5);
+		mlx->zoom += mlx->zoom / 5;
 	}
 	else if (key == MOUSE_WHEEL_DOWN)
 	{
-		mlx->moveX -= ((mlx->moveX - x) / 10);
-		mlx->moveY -= ((mlx->moveY - y) / 10);
-		mlx->zoom -= mlx->zoom / 10;
+		mlx->moveX -= ((mlx->moveX - x) / 5);
+		mlx->moveY -= ((mlx->moveY - y) / 5);
+		mlx->zoom -= mlx->zoom / 5;
 	}
-	printf("key = %d\t x = %d\t y = %d\n", key, x, y);
+	//printf("key = %d\t x = %d\t y = %d\n", key, x, y);
 	draw(mlx);
 	return (0);
 }

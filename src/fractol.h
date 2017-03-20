@@ -119,6 +119,10 @@ void *julia(void *fractal);
 */
 void *mandelbrot(void *fractal);
 /*
+** mandelcube.c
+*/
+void	*mandelcube(void *fractal);
+/*
 ** main.c
 */
 void	struct_init(t_map **mlx, int figure);

@@ -13,7 +13,7 @@ void	struct_init(t_map **mlx, int figure)
 	(*mlx)->init = NULL;
 	(*mlx)->win = NULL;
 	(*mlx)->img = NULL;
-	(*mlx)->zoom = 1;
+	(*mlx)->zoom = 200;
 	(*mlx)->moveX = WIN_SIZE / 2;
 	(*mlx)->moveY = (*mlx)->moveX;
 	(*mlx)->maxIter = 20;
